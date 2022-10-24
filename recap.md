@@ -31,3 +31,7 @@
 ## Interface
 
 - object shape(객체 모양)을 TS에게 설명해주는 TS의 개념
+
+## react-router-dom
+
+- useParams() : 라우터 사용시 파라미터 정보를 가져와 활용(객체형식)
