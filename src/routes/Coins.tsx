@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { fetchCoins } from "../api";
 
 const Container = styled.div`
-  padding: 0px 20px;
+  padding: 20px 20px;
   max-width: 480px;
   margin: 0 auto;
 `;
@@ -14,13 +14,19 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 `;
 const CoinsList = styled.ul``;
 const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.liColor};
+  color: ${(props) => props.theme.liTextColor};
+  font-size: 18px;
   border-radius: 15px;
   margin-bottom: 10px;
+  transition: background-color 0.2s ease-in;
+  &:hover {
+    background-color: ${(props) => props.theme.liHoverColor};
+  }
   a {
     display: flex;
     align-items: center;
@@ -36,7 +42,8 @@ const Coin = styled.li`
 
 const Title = styled.h1`
   font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.titleColor};
+  font-weight: 700;
 `;
 
 const Loader = styled.span`
@@ -86,7 +93,7 @@ function Coins() {
         />
       </Helmet>
       <Header>
-        <Title>Coins</Title>
+        <Title>Crypto Tracker</Title>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>

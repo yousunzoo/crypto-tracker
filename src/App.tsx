@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { createGlobalStyle } from "styled-components";
 import Router from "./Router";
+import styled, { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -66,13 +68,41 @@ a {
   color:inherit;
 }
 `;
+const Togglebtn = styled.button`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 16px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.toggleColor};
+  outline: none;
+  border-radius: 10px;
+  border-color: transparent;
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: ${(props) => props.theme.liHoverColor};
+  }
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+`;
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+  const [isDarkIcon, setIsDarkIcon] = useState("🌝");
+  const toggleDark = () => {
+    setIsDark((current) => !current);
+    setIsDarkIcon((current) => (current === "🌝" ? "🌜" : "🌝"));
+  };
   return (
     <>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <Togglebtn onClick={toggleDark}>{isDarkIcon}</Togglebtn>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }

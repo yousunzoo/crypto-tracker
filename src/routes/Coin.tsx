@@ -80,7 +80,9 @@ interface PriceData {
 
 const Title = styled.h1`
   font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  font-weight: 700;
+  color: ${(props) => props.theme.titleColor};
+  margin-bottom: 20px;
 `;
 
 const Loader = styled.span`
@@ -102,31 +104,10 @@ const Header = styled.header`
   margin-top: 30px;
 `;
 
-const BackBtn = styled.span`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 16px;
-  color: ${(props) => props.theme.bgColor};
-  background-color: rgba(255, 255, 255, 0.9);
-  outline: none;
-  border-radius: 10px;
-  border-color: transparent;
-  &:hover {
-    background-color: ${(props) => props.theme.bgColor};
-  }
-  a {
-    display: block;
-    padding: 10px 15px;
-    &:hover {
-      color: ${(props) => props.theme.accentColor};
-    }
-  }
-`;
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.itemColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -135,6 +116,7 @@ const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10px;
 
   span:first-child {
     font-size: 10px;
@@ -144,8 +126,40 @@ const OverviewItem = styled.div`
   }
 `;
 
+const BackBtn = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  font-size: 16px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.toggleColor};
+  outline: none;
+  border-radius: 10px;
+  border-color: transparent;
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: ${(props) => props.theme.liHoverColor};
+  }
+  a {
+    display: block;
+    padding: 10px 15px;
+    transition: color 0.3s ease-in;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+`;
+
 const Description = styled.p`
   margin: 20px 0px;
+  line-height: 1.2;
 `;
 
 const Tabs = styled.div`
@@ -160,11 +174,11 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.tabColor};
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+    props.isActive ? props.theme.accentColor : props.theme.tabTextColor};
   a {
     display: block;
   }
@@ -209,70 +223,73 @@ function Coin() {
 
   const loading = infoLoading || tickersLoading;
   return (
-    <Container>
-      <Helmet>
-        <title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
-        </title>
-      </Helmet>
-      <Header>
-        <Title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
-        </Title>
-        {/* 홈 화면을 통해서 왔을 때 / 바로 접속할 때 */}
-      </Header>
+    <>
       <BackBtn>
-        <Link to="/">Home</Link>
+        <Link to="/">🏠</Link>
       </BackBtn>
-      {loading ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <>
-          <Overview>
-            <OverviewItem>
-              <span>RANK:</span>
-              <span>{infoData?.rank}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>SYMBOL:</span>
-              <span>{infoData?.symbol}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>PRICE:</span>
-              <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
-            </OverviewItem>
-          </Overview>
-          <Description>{infoData?.description}</Description>
-          <Overview>
-            <OverviewItem>
-              <span>TOTAL SUPPLY:</span>
-              <span>{tickersData?.total_supply}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>MAX SUPPLY:</span>
-              <span>{tickersData?.max_supply}</span>
-            </OverviewItem>
-          </Overview>
-          <Tabs>
-            <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
-            </Tab>
-            <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
-            </Tab>
-          </Tabs>
+      <Container>
+        <Helmet>
+          <title>
+            {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          </title>
+        </Helmet>
 
-          <Switch>
-            <Route path={`/:coinId/price`}>
-              <Price />
-            </Route>
-            <Route path={`/:coinId/chart`}>
-              <Chart coinId={coinId} />
-            </Route>
-          </Switch>
-        </>
-      )}
-    </Container>
+        <Header>
+          <Title>
+            {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          </Title>
+          {/* 홈 화면을 통해서 왔을 때 / 바로 접속할 때 */}
+        </Header>
+        {loading ? (
+          <Loader>Loading...</Loader>
+        ) : (
+          <>
+            <Overview>
+              <OverviewItem>
+                <span>RANK:</span>
+                <span>{infoData?.rank}</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>SYMBOL:</span>
+                <span>{infoData?.symbol}</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>PRICE:</span>
+                <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
+              </OverviewItem>
+            </Overview>
+            <Description>{infoData?.description}</Description>
+            <Overview>
+              <OverviewItem>
+                <span>TOTAL SUPPLY:</span>
+                <span>{tickersData?.total_supply}</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>MAX SUPPLY:</span>
+                <span>{tickersData?.max_supply}</span>
+              </OverviewItem>
+            </Overview>
+            <Tabs>
+              <Tab isActive={chartMatch !== null}>
+                <Link to={`/${coinId}/chart`}>Chart</Link>
+              </Tab>
+              <Tab isActive={priceMatch !== null}>
+                <Link to={`/${coinId}/price`}>Price</Link>
+              </Tab>
+            </Tabs>
+
+            <Switch>
+              <Route path={`/:coinId/price`}>
+                <Price />
+              </Route>
+              <Route path={`/:coinId/chart`}>
+                <Chart coinId={coinId} />
+              </Route>
+            </Switch>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
 export default Coin;
