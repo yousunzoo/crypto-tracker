@@ -52,3 +52,16 @@ CoinInterface[] : 배열형식임을 알려줌
 
 코인 정보 : https://api.coinpaprika.com/v1/coins/btc-bitcoin
 코인 가격 : https://api.coinpaprika.com/v1/tickers/btc-bitcoin
+
+- 현재 문제) 코인 정보와 가격에 대한 state를 만들었을 때, info와 priceInfo는 TS에서 빈 배열로 인식을 해서 에러를 발생시킨다.
+
+- 객체로 된 데이터를 가져와서 TS interface 세팅할 때
+  1. 콘솔 창에서 각 객체를 오른쪽 마우스 클릭 후 set global Values
+  2. Object.keys(temp1).join() => temp1 객체의 키 값을 문자형식으로 가져옴
+  3. Object.values(temp1).map(v => typeof v).join() => temp1 객체의 값의 타입을 문자형식으로 가져옴
+
+# VSCode shortcut
+
+- ctrl + D : 같은 문자열 선택
+- shift + Alt + i : 선택한 모든 문자열의 가장 우측 끝으로 포커싱
+- ctrl + shift + 오른쪽 화살표 : 현재 선택한 문자열을 기준으로 우측 끝까지 문자열 전체 선택
