@@ -142,3 +142,11 @@ npm i --save react-apexcharts apexcharts
 
 - 무엇을 render하던 그것이 문서의 head로 가는 것
 - title, base, meta, link, script, noscript, style 태그 지원
+
+# deploying to Github pages
+
+- `npm i gh-pages`
+- package.json 맨 마지막에 "homepage": "https://깃허브계정.github.io/프로젝트명/" 입력
+- scripts에 "predeploy" : "npm run build", "deploy": "gh-pages -d build" 추가
+- npm run deploy 실행
+- deploy는 기본적으로 predeploy 실행

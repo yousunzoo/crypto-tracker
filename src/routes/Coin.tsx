@@ -82,7 +82,6 @@ const Title = styled.h1`
   font-size: 48px;
   font-weight: 700;
   color: ${(props) => props.theme.titleColor};
-  margin-bottom: 20px;
 `;
 
 const Loader = styled.span`
@@ -101,7 +100,8 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 60px;
+  margin-bottom: 20px;
 `;
 
 const Overview = styled.div`
@@ -127,6 +127,7 @@ const OverviewItem = styled.div`
 `;
 
 const BackBtn = styled.p`
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;

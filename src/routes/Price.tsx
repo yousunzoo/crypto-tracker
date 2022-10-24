@@ -81,7 +81,7 @@ function Price({ coinId }: PriceProps) {
           <Tabs>
             <Tab>
               <span>현재 가격</span>
-              <span>{USD?.price.toFixed(2)} USD</span>
+              <span>{USD?.price.toFixed(6)} USD</span>
             </Tab>
             <Tab>
               <span>15분 전 대비</span>

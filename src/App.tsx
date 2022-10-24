@@ -45,7 +45,8 @@ body {
   line-height: 1;  
   font-family: 'Source Sans Pro', sans-serif;
   background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor}
+  color:${(props) => props.theme.textColor};
+  transition : all 0.3s ease-in;
 }
 menu, ol, ul {
   list-style: none;
@@ -70,9 +71,11 @@ a {
 `;
 const Togglebtn = styled.button`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 20px;
   left: 20px;
-  font-size: 16px;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.toggleColor};
   outline: none;
@@ -86,6 +89,11 @@ const Togglebtn = styled.button`
   width: 50px;
   height: 50px;
   text-align: center;
+  z-index: 1;
+  span {
+    display: block;
+    font-size: 16px;
+  }
 `;
 
 function App() {
@@ -98,7 +106,9 @@ function App() {
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <Togglebtn onClick={toggleDark}>{isDarkIcon}</Togglebtn>
+        <Togglebtn onClick={toggleDark}>
+          <span>{isDarkIcon}</span>
+        </Togglebtn>
         <GlobalStyle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
