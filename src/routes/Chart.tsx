@@ -25,69 +25,131 @@ function Chart({ coinId }: ChartProps) {
       refetchInterval: 5000,
     }
   );
-  console.log(data);
+  const mappedOhlcvData = data?.map((price) => ({
+    x: new Date(price.time_close * 1000).toUTCString(),
+    y: [
+      parseFloat(price.open),
+      parseFloat(price.high),
+      parseFloat(price.low),
+      parseFloat(price.close),
+    ],
+  }));
+
+  console.log(mappedOhlcvData);
   return (
     <div>
       {isLoading ? (
         "Loading chart..."
       ) : (
-        <ApexChart
-          type="line"
-          series={[
-            {
-              name: "price",
-              data: data?.map((price) => parseFloat(price.close)) ?? [],
-            },
-          ]}
-          options={{
-            theme: {
-              mode: "dark",
-            },
-            chart: {
-              height: 300,
-              width: 500,
-              toolbar: {
+        <>
+          <ApexChart
+            type="line"
+            series={[
+              {
+                name: "price",
+                data: data?.map((price) => parseFloat(price.close)) ?? [],
+              },
+            ]}
+            options={{
+              theme: {
+                mode: "dark",
+              },
+              chart: {
+                height: 300,
+                width: 500,
+                toolbar: {
+                  show: false,
+                },
+                background: "transparent",
+              },
+              grid: {
                 show: false,
               },
-              background: "transparent",
-            },
-            grid: {
-              show: false,
-            },
-            yaxis: {
-              show: false,
-            },
-            xaxis: {
-              axisBorder: {
+              yaxis: {
                 show: false,
               },
-              labels: {
+              xaxis: {
+                axisBorder: {
+                  show: false,
+                },
+                labels: {
+                  show: false,
+                },
+                axisTicks: {
+                  show: false,
+                },
+                type: "datetime",
+                categories: data?.map((price) =>
+                  new Date(price.time_close * 1000).toUTCString()
+                ),
+              },
+              stroke: {
+                curve: "smooth",
+                width: 4,
+              },
+              fill: {
+                type: "gradient",
+                gradient: { gradientToColors: ["#55efc4"], stops: [0, 100] },
+              },
+              colors: ["#0984e3"],
+              tooltip: {
+                y: {
+                  formatter: (value) => `$${value.toFixed(2)}`,
+                },
+              },
+            }}
+          />
+          <ApexChart
+            type="candlestick"
+            series={
+              [
+                {
+                  data: mappedOhlcvData,
+                },
+              ] as unknown as number[]
+            }
+            options={{
+              theme: {
+                mode: "dark",
+              },
+              chart: {
+                type: "candlestick",
+                height: 350,
+                width: 500,
+                toolbar: {
+                  show: false,
+                },
+                background: "transparent",
+              },
+              stroke: {
+                curve: "smooth",
+                width: 2,
+              },
+              yaxis: {
                 show: false,
               },
-              axisTicks: {
-                show: false,
+              xaxis: {
+                type: "datetime",
+                categories: data?.map((price) =>
+                  new Date(price.time_close * 1000).toUTCString()
+                ),
+                labels: {
+                  style: {
+                    colors: "#9c88ff",
+                  },
+                },
               },
-              type: "datetime",
-              categories: data?.map((price) =>
-                new Date(price.time_close * 1000).toUTCString()
-              ),
-            },
-            stroke: {
-              curve: "smooth",
-              width: 4,
-            },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#55efc4"], stops: [0, 100] },
-            },
-            colors: ["#0984e3"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
+              plotOptions: {
+                candlestick: {
+                  colors: {
+                    upward: "#3c90eb",
+                    downward: "#df7d46",
+                  },
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </>
       )}
     </div>
   );
