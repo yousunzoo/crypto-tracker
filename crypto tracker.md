@@ -120,3 +120,15 @@ CoinInterface[] : 배열형식임을 알려줌
 # Chart component
 
 - 우리가 보고자 하는 가격의 암호화폐가 무엇인지 알아야 한다.
+
+# APEXCHARTS
+
+: 차트를 제공해주는 라이브러리
+npm i --save react-apexcharts apexcharts
+
+- 제공된 데이터가 문자일 때, 숫자형으로 바꾸는 방법
+  => `data : data?.map((price) => parseFloat(price.close)) ?? []`
+  - 앞의 계산값이 존재하지 않으면 빈 배열 반환
+- `<Apexcharts type="line" series={[ name : 'sales', data : [10,20,30,40,50] ]} options ={{theme : {mode : "dark"}}}/>` 형식으로 입력
+
+- https://apexcharts.com/docs/options/ 에서 차트 옵션 확인 가능
