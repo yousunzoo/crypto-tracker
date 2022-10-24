@@ -89,9 +89,15 @@ CoinInterface[] : 배열형식임을 알려줌
 
 # React query
 
+- fetcher 함수를 만들 수 있다. -- useStatae, useEffect를 대신해줌!
+- 아주 강력한 caching 매커니즘을 가지고 있음 -- 데이터를 쿼리로 캐시에 저장해줌.
+
 - fetcher 함수는 꼭 fetch promise를 return해줘야 한다.
+
 - useQuery(queryKey, queryFn)
 - 첫번째 인수에는 queryKey, 두번째 인수에는 fetcher 함수
+- key는 react query 캐시 시스템에서 저장되고 작동되기 위해 고유한 값이여야 한다.
+
 - queryFn 자리에는 함수의 형태로 인자를 넘겨줘야 한다.
   - 함수가 들어가야 하지 함수의 실행값이 들어가면 안됨.
   - 함수에 argument가 있을 때 : `useQuery(["info", coinId],() => fetchCoinInfo(coinId))` 형식
@@ -110,3 +116,7 @@ CoinInterface[] : 배열형식임을 알려줌
 `import { ReactQueryDevtools } from "react-query/devtools";`
 `<ReactQueryDevtools initialIsOpen={true} />`
 -> react query에서 일어나고 있는 일들을 개발도구로 볼 수 있음
+
+# Chart component
+
+- 우리가 보고자 하는 가격의 암호화폐가 무엇인지 알아야 한다.
