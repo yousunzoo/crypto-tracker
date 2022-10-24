@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import React, { useState, useEffect } from "react";
 import {
   Switch,
@@ -10,6 +11,7 @@ import {
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
+import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
 interface RouteParams {
   coinId: string;
@@ -142,13 +144,23 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 function Coin() {
-  const [loading, setLoading] = useState(true);
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
-  const [info, setInfo] = useState<InfoData>();
-  const [priceInfo, setPriceInfo] = useState<PriceData>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
+
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
+    ["info", coinId],
+    () => fetchCoinInfo(coinId)
+  );
+  const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
+    ["tickers", coinId],
+    () => fetchCoinTickers(coinId)
+  );
+
+  /* const [loading, setLoading] = useState(true);
+  const [info, setInfo] = useState<InfoData>();
+  const [priceInfo, setPriceInfo] = useState<PriceData>();
   useEffect(() => {
     (async () => {
       const infoData = await (
@@ -163,13 +175,14 @@ function Coin() {
     })();
   }, [coinId]);
   // coinId가 변할 때마다 useEffect 다시 실행
-  // coinId는 url 값이므로 같은 페이지 내에서 변할 일이 없음.
+  // coinId는 url 값이므로 같은 페이지 내에서 변할 일이 없음. */
 
+  const loading = infoLoading || tickersLoading;
   return (
     <Container>
       <Header>
         <Title>
-          {state?.name ? state.name : loading ? "Loading..." : info?.name}
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
         {/* 홈 화면을 통해서 왔을 때 / 바로 접속할 때 */}
       </Header>
@@ -180,26 +193,26 @@ function Coin() {
           <Overview>
             <OverviewItem>
               <span>RANK:</span>
-              <span>{info?.rank}</span>
+              <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
               <span>SYMBOL:</span>
-              <span>{info?.symbol}</span>
+              <span>{infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
               <span>OPEN SOURCE:</span>
-              <span>{info?.open_source ? "TRUE" : "FALSE"}</span>
+              <span>{infoData?.open_source ? "TRUE" : "FALSE"}</span>
             </OverviewItem>
           </Overview>
-          <Description>{info?.description}</Description>
+          <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
               <span>TOTAL SUPPLY:</span>
-              <span>{priceInfo?.total_supply}</span>
+              <span>{tickersData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
               <span>MAX SUPPLY:</span>
-              <span>{priceInfo?.max_supply}</span>
+              <span>{tickersData?.max_supply}</span>
             </OverviewItem>
           </Overview>
           <Tabs>

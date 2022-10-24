@@ -92,4 +92,21 @@ CoinInterface[] : 배열형식임을 알려줌
 - fetcher 함수는 꼭 fetch promise를 return해줘야 한다.
 - useQuery(queryKey, queryFn)
 - 첫번째 인수에는 queryKey, 두번째 인수에는 fetcher 함수
-- react query를 이용하면 세부 페이지로 이동했다 다시 홈페이지로 넘어와도 리로딩이 되지 않는다. => react query가 데이터를 캐시에 저장해두기 때문
+- queryFn 자리에는 함수의 형태로 인자를 넘겨줘야 한다.
+  - 함수가 들어가야 하지 함수의 실행값이 들어가면 안됨.
+  - 함수에 argument가 있을 때 : `useQuery(["info", coinId],() => fetchCoinInfo(coinId))` 형식
+  - 함수에 argument가 없을 때 : `useQuery("AllCoins",() => fetchCoin)` 형식
+- react query를 이용하면 세부 페이지로 이동했다 다시 홈페이지로 넘어와도 리로딩이 되지 않는다.
+  => react query가 데이터를 캐시에 저장해두기 때문
+- `const { isLoading, data } = useQuery<ICoin[]>("AllCoins", fetchCoins);`
+- isLoading 에서 fetch가 이뤄지는 동안에는 true, 데이터를 받은 후에는 false 값 반환
+- fetch 가 이뤄지면 data에 json 데이터 반환.
+
+- 한 파일 안에서 useQuery를 많이 쓸 때, key 값을 다르게 설정해줘야 한다.
+  `const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>( ["info", coinId], () => fetchCoinInfo(coinId) );`
+- queryKey는 배열형식으로 줄 수 있음.
+- isLoading과 data도 각 객체에 이름을 부여해줄 수 있음
+
+`import { ReactQueryDevtools } from "react-query/devtools";`
+`<ReactQueryDevtools initialIsOpen={true} />`
+-> react query에서 일어나고 있는 일들을 개발도구로 볼 수 있음
