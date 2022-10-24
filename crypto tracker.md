@@ -44,4 +44,11 @@ CoinInterface[] : 배열형식임을 알려줌
 - `const { state } = useLocation<RouteState>();`
 - useLocation()으로 Link로부터 받은 데이터 불러오기
 
-- `{state?.name || "Loading.."}` : state에 name이 존재한다면 보여주고 아닐 시 "Loading"을 띄워라.
+- Coin 페이지는 홈페이지를 통해서 접근해야지만 데이터 불러올 수 있음.
+- Coin 페이지에 직접 접근했을 때 띄워줄 메세지 필요
+- `{state?.name || "Loading.."}` : state에 name이 존재한다면 보여주고 아닐 시 "Loading"을 띄워라. --> 옵셔널 체이닝 `?.`
+
+# Coin data
+
+코인 정보 : https://api.coinpaprika.com/v1/coins/btc-bitcoin
+코인 가격 : https://api.coinpaprika.com/v1/tickers/btc-bitcoin
