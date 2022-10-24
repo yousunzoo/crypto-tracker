@@ -71,3 +71,12 @@ CoinInterface[] : 배열형식임을 알려줌
 - 일반적으로 페이지가 실행될 때 useEffect를 한번 실행하기 위해선 useEffect(()=>{},[]) 으로 deps 단계에 빈 배열을 넣음.
 
 - hooks는 최상의 상태를 유지하기 위해 dependency에 값을 넣어야 한다.
+
+# nested routes
+
+- 중첩 라우팅 : 라우팅 맵핑을 최상위 컴포넌트 뿐만 아니라 여러 개의 컴포넌트에 걸쳐서 단계별로 정의하는 라우팅 기법
+
+- http://localhost:3000/eth-ethereum/price 라고 입력했을 때 해당 코인의 가격 정보가 표시되고,
+- http://localhost:3000/eth-ethereum/chart 라고 입력했을 때 해당 코인의 차트 정보가 표시되도록 하는 것
+
+- 즉, 페이지 내에서 그 페이지에 대한 상세 정보를 표시 시키는 것
