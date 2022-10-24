@@ -35,3 +35,13 @@ createGlobalStyle : 전역에 적용할 수 있는 스타일
 
 `const [coins, setCoins] = useState<CoinInterface[]>([]);`
 CoinInterface[] : 배열형식임을 알려줌
+
+# Link로부터 state 받아오기
+
+- Link를 통해서 state 등의 정보를 페이지로 보낼 수 있음
+- `<Link to={{pathname=`/${coin.name}`, state: { name: coin.name },}}>`
+- 세부 페이지에서 `import {useLocation} from "react-router-dom";`
+- `const { state } = useLocation<RouteState>();`
+- useLocation()으로 Link로부터 받은 데이터 불러오기
+
+- `{state?.name || "Loading.."}` : state에 name이 존재한다면 보여주고 아닐 시 "Loading"을 띄워라.
