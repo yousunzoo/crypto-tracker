@@ -82,3 +82,6 @@ function Coins() {
   );
 }
 export default Coins;
+
+// 현 상태의 문제점 : link를 타고 Coin 페이지로 들어갔다가 다시 홈페이지로 돌아오면 데이터가 reload 되면서 useEffect가 실행됨.
+// --> 코인 개별페이지로 이동했다가 screen이 바뀌면서 state가 사라지고 홈페이지 돌아올 때마다  API request가 일어남
