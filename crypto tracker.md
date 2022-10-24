@@ -80,3 +80,9 @@ CoinInterface[] : 배열형식임을 알려줌
 - http://localhost:3000/eth-ethereum/chart 라고 입력했을 때 해당 코인의 차트 정보가 표시되도록 하는 것
 
 - 즉, 페이지 내에서 그 페이지에 대한 상세 정보를 표시 시키는 것
+
+- 만들어야 할 것) price와 chart를 스위치하는 탭
+- Link와 Switch 컴포넌트를 이용해 만들기
+
+- useRouteMatch("/링크") : 지금 페이지 링크와 RouteMatch 링크가 동일하다면 객체를 반환, 아니라면 null 값을 반환
+- Tab에 isActive 속성을 부여해서 해당 탭이 실행되었을 때 style 수정
