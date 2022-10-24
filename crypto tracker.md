@@ -65,3 +65,9 @@ CoinInterface[] : 배열형식임을 알려줌
 - ctrl + D : 같은 문자열 선택
 - shift + Alt + i : 선택한 모든 문자열의 가장 우측 끝으로 포커싱
 - ctrl + shift + 오른쪽 화살표 : 현재 선택한 문자열을 기준으로 우측 끝까지 문자열 전체 선택
+
+# useEffect deps
+
+- 일반적으로 페이지가 실행될 때 useEffect를 한번 실행하기 위해선 useEffect(()=>{},[]) 으로 deps 단계에 빈 배열을 넣음.
+
+- hooks는 최상의 상태를 유지하기 위해 dependency에 값을 넣어야 한다.

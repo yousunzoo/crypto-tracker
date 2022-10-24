@@ -102,8 +102,11 @@ function Coin() {
       ).json();
       setInfo(infoData);
       setPriceInfo(priceData);
+      setLoading(false);
     })();
-  }, []);
+  }, [coinId]);
+  // coinId가 변할 때마다 useEffect 다시 실행
+  // coinId는 url 값이므로 같은 페이지 내에서 변할 일이 없음.
 
   return (
     <Container>
