@@ -14,6 +14,7 @@ export const lightTheme: DefaultTheme = {
   tabColor: "#f29383",
   tabTextColor: "#fff",
   toggleColor: "#ffffff",
+  tabLiColor: "#fff",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -30,4 +31,5 @@ export const darkTheme: DefaultTheme = {
   tabColor: "#84a59d",
   tabTextColor: "#fff",
   toggleColor: "rgba(255,255,255,0.2)",
+  tabLiColor: "#2f3640",
 };

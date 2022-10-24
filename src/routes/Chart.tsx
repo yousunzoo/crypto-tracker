@@ -35,7 +35,6 @@ function Chart({ coinId }: ChartProps) {
     ],
   }));
 
-  console.log(mappedOhlcvData);
   return (
     <div>
       {isLoading ? (

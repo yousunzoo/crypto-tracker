@@ -15,5 +15,6 @@ declare module "styled-components" {
     tabColor: string;
     tabTextColor: string;
     toggleColor: string;
+    tabLiColor: string;
   }
 }
