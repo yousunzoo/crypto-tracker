@@ -89,7 +89,8 @@ const Loader = styled.span`
 `;
 
 const Container = styled.div`
-  padding: 0px 20px;
+  position: relative;
+  padding: 20px 20px;
   max-width: 480px;
   margin: 0 auto;
 `;
@@ -98,8 +99,30 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 `;
 
+const BackBtn = styled.span`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 16px;
+  color: ${(props) => props.theme.bgColor};
+  background-color: rgba(255, 255, 255, 0.9);
+  outline: none;
+  border-radius: 10px;
+  border-color: transparent;
+  &:hover {
+    background-color: ${(props) => props.theme.bgColor};
+  }
+  a {
+    display: block;
+    padding: 10px 15px;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
+`;
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
@@ -146,6 +169,7 @@ const Tab = styled.span<{ isActive: boolean }>`
     display: block;
   }
 `;
+
 function Coin() {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
@@ -190,12 +214,6 @@ function Coin() {
         <title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </title>
-        <link
-          rel="icon"
-          type="image/png"
-          href={`https://coinicons-api.vercel.app/api/icon/${state.symbol}`}
-          sizes="16x16"
-        />
       </Helmet>
       <Header>
         <Title>
@@ -203,6 +221,9 @@ function Coin() {
         </Title>
         {/* 홈 화면을 통해서 왔을 때 / 바로 접속할 때 */}
       </Header>
+      <BackBtn>
+        <Link to="/">Home</Link>
+      </BackBtn>
       {loading ? (
         <Loader>Loading...</Loader>
       ) : (
