@@ -30,3 +30,8 @@ createGlobalStyle : 전역에 적용할 수 있는 스타일
 - react router link들은 anchor로 바뀐다.
 - handle event도 있음
   `<Link to={`/링크주소(보통 id)`}>링크 내용</Link>`
+
+# interface
+
+`const [coins, setCoins] = useState<CoinInterface[]>([]);`
+CoinInterface[] : 배열형식임을 알려줌
