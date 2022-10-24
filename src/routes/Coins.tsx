@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
@@ -76,6 +76,15 @@ function Coins() {
 
   return (
     <Container>
+      <Helmet>
+        <title>Coins</title>
+        <link
+          rel="icon"
+          type="image/png"
+          href="https://www.iconpacks.net/icons/1/free-coin-icon-794-thumb.png"
+          sizes="16x16"
+        />
+      </Helmet>
       <Header>
         <Title>Coins</Title>
       </Header>
@@ -88,7 +97,7 @@ function Coins() {
               <Link
                 to={{
                   pathname: `/${coin.id}`,
-                  state: { name: coin.name },
+                  state: { name: coin.name, symbol: coin.symbol.toLowerCase() },
                 }}>
                 <Img
                   src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}

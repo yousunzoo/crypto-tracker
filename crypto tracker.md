@@ -94,7 +94,7 @@ CoinInterface[] : 배열형식임을 알려줌
 
 - fetcher 함수는 꼭 fetch promise를 return해줘야 한다.
 
-- useQuery(queryKey, queryFn)
+- useQuery(queryKey, queryFn, {refetchInterval: ms})
 - 첫번째 인수에는 queryKey, 두번째 인수에는 fetcher 함수
 - key는 react query 캐시 시스템에서 저장되고 작동되기 위해 고유한 값이여야 한다.
 
@@ -107,6 +107,7 @@ CoinInterface[] : 배열형식임을 알려줌
 - `const { isLoading, data } = useQuery<ICoin[]>("AllCoins", fetchCoins);`
 - isLoading 에서 fetch가 이뤄지는 동안에는 true, 데이터를 받은 후에는 false 값 반환
 - fetch 가 이뤄지면 data에 json 데이터 반환.
+- 세번째 argument에는 몇 초마다 다시 불러오기 할지 설정할 수 있다.
 
 - 한 파일 안에서 useQuery를 많이 쓸 때, key 값을 다르게 설정해줘야 한다.
   `const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>( ["info", coinId], () => fetchCoinInfo(coinId) );`
@@ -132,3 +133,12 @@ npm i --save react-apexcharts apexcharts
 - `<Apexcharts type="line" series={[ name : 'sales', data : [10,20,30,40,50] ]} options ={{theme : {mode : "dark"}}}/>` 형식으로 입력
 
 - https://apexcharts.com/docs/options/ 에서 차트 옵션 확인 가능
+
+- 초단위를 날짜 형식으로 바꾸기
+  => new Date(price.time_close \* 1000).toUTCString();
+  - toUTCString : 세계시(UTC)에 따라 리턴(GMT 시간) => Mon, 24 Oct 2022 06:26:41 GMT 형식
+
+# react helmet
+
+- 무엇을 render하던 그것이 문서의 head로 가는 것
+- title, base, meta, link, script, noscript, style 태그 지원
