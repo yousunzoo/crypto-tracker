@@ -86,3 +86,10 @@ CoinInterface[] : 배열형식임을 알려줌
 
 - useRouteMatch("/링크") : 지금 페이지 링크와 RouteMatch 링크가 동일하다면 객체를 반환, 아니라면 null 값을 반환
 - Tab에 isActive 속성을 부여해서 해당 탭이 실행되었을 때 style 수정
+
+# React query
+
+- fetcher 함수는 꼭 fetch promise를 return해줘야 한다.
+- useQuery(queryKey, queryFn)
+- 첫번째 인수에는 queryKey, 두번째 인수에는 fetcher 함수
+- react query를 이용하면 세부 페이지로 이동했다 다시 홈페이지로 넘어와도 리로딩이 되지 않는다. => react query가 데이터를 캐시에 저장해두기 때문
