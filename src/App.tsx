@@ -69,36 +69,11 @@ a {
   color:inherit;
 }
 `;
-const Togglebtn = styled.button`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 20px;
-  left: 20px;
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.toggleColor};
-  outline: none;
-  border-radius: 10px;
-  border-color: transparent;
-  transition: background-color 0.3s ease-in;
-  &:hover {
-    background-color: ${(props) => props.theme.liHoverColor};
-  }
-  font-size: 20px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  z-index: 1;
-  span {
-    display: block;
-    font-size: 16px;
-  }
-`;
 
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [isDarkIcon, setIsDarkIcon] = useState("🌝");
+
   const toggleDark = () => {
     setIsDark((current) => !current);
     setIsDarkIcon((current) => (current === "🌝" ? "🌜" : "🌝"));
@@ -106,11 +81,12 @@ function App() {
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <Togglebtn onClick={toggleDark}>
-          <span>{isDarkIcon}</span>
-        </Togglebtn>
         <GlobalStyle />
-        <Router />
+        <Router
+          isDark={isDark}
+          toggleDark={toggleDark}
+          isDarkIcon={isDarkIcon}
+        />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>

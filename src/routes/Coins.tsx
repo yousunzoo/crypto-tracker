@@ -57,6 +57,34 @@ const Img = styled.img`
   height: 35px;
   margin-right: 10px;
 `;
+
+const Togglebtn = styled.button`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  left: 20px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.toggleColor};
+  outline: none;
+  border-radius: 10px;
+  border-color: transparent;
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: ${(props) => props.theme.liHoverColor};
+  }
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  z-index: 1;
+  span {
+    display: block;
+    font-size: 16px;
+  }
+`;
+
 interface ICoin {
   id: string;
   name: string;
@@ -67,7 +95,11 @@ interface ICoin {
   type: string;
 }
 
-function Coins() {
+interface ICoinsProps {
+  toggleDark: () => void;
+  isDarkIcon: string;
+}
+function Coins({ toggleDark, isDarkIcon }: ICoinsProps) {
   const { isLoading, data } = useQuery<ICoin[]>("AllCoins", fetchCoins);
   // useQuery 함수는 fetcher 함수를 부르고 fetcher 함수가 loading 중이라면 react query에서 isLoading에서 알려줌. fetcher 함수가 끝나면 react query에서 json을 data에 넣음
 
@@ -95,6 +127,9 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>Crypto Tracker</Title>
+        <Togglebtn onClick={toggleDark}>
+          <span>{isDarkIcon}</span>
+        </Togglebtn>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
