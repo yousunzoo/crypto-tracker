@@ -95,11 +95,8 @@ interface ICoin {
   type: string;
 }
 
-interface ICoinsProps {
-  toggleDark: () => void;
-  isDarkIcon: string;
-}
-function Coins({ toggleDark, isDarkIcon }: ICoinsProps) {
+interface ICoinsProps {}
+function Coins({}: ICoinsProps) {
   const { isLoading, data } = useQuery<ICoin[]>("AllCoins", fetchCoins);
   // useQuery 함수는 fetcher 함수를 부르고 fetcher 함수가 loading 중이라면 react query에서 isLoading에서 알려줌. fetcher 함수가 끝나면 react query에서 json을 data에 넣음
 
@@ -127,8 +124,8 @@ function Coins({ toggleDark, isDarkIcon }: ICoinsProps) {
       </Helmet>
       <Header>
         <Title>Crypto Tracker</Title>
-        <Togglebtn onClick={toggleDark}>
-          <span>{isDarkIcon}</span>
+        <Togglebtn>
+          <span>toggle</span>
         </Togglebtn>
       </Header>
       {isLoading ? (

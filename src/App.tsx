@@ -71,22 +71,11 @@ a {
 `;
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const [isDarkIcon, setIsDarkIcon] = useState("🌝");
-
-  const toggleDark = () => {
-    setIsDark((current) => !current);
-    setIsDarkIcon((current) => (current === "🌝" ? "🌜" : "🌝"));
-  };
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Router
-          isDark={isDark}
-          toggleDark={toggleDark}
-          isDarkIcon={isDarkIcon}
-        />
+        <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>

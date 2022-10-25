@@ -1,6 +1,4 @@
-# recoil
-
-: React JS에서 state management 역할을 하는 library
+# state management
 
 - 왜 state management가 필요한가?
 
@@ -21,3 +19,8 @@
 - 일종의 버블을 형성해서 부모가 자식에게 prop을 내려주는 계층 구조 대신에, state를 어떤 bubble 안에 넣고 header, chart가 직접 접근 가능하도록 한다.
 
 => state management는 여러 컴포넌트들이 공유할 state(global state)와 state manipulation 함수들을 여러 단계의 props를 거쳐서 전달하는 번거로움을 해결할 수 있다.
+
+# recoil
+
+: React JS에서 state management 역할을 하는 library
+: 서로 다른 atom(bubble)을 형성, 특정 component에 종속되지 않음. value가 필요한 컴포넌트가 직접 연결
