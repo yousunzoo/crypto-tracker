@@ -37,3 +37,7 @@
   })
 
   `const isDark = useRecoilValue(isDarkAtom);` 형식으로 해당 컴포넌트에서 받아서 사용
+
+`const setDarkAtom = useSetRecoilState(isDarkAtom);`
+`const toggleDarkAtom = () => setDarkAtom((prev) => !prev);`
+: 해당 아톰의 값을 바꾸는 함수 설정가능 -- useState와 비슷

@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
+import { isDarkAtom, isDarkTAtom } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const Container = styled.div`
   padding: 20px 20px;
@@ -97,6 +99,14 @@ interface ICoin {
 
 interface ICoinsProps {}
 function Coins({}: ICoinsProps) {
+  const darkAtom = useRecoilValue(isDarkAtom);
+  const darkTAtom = useRecoilValue(isDarkTAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const setDarkTAtom = useSetRecoilState(isDarkTAtom);
+  const toggleDarkAtom = () => {
+    setDarkAtom((prev) => !prev);
+    darkAtom ? setDarkTAtom("🌞") : setDarkTAtom("🌙");
+  };
   const { isLoading, data } = useQuery<ICoin[]>("AllCoins", fetchCoins);
   // useQuery 함수는 fetcher 함수를 부르고 fetcher 함수가 loading 중이라면 react query에서 isLoading에서 알려줌. fetcher 함수가 끝나면 react query에서 json을 data에 넣음
 
@@ -124,8 +134,8 @@ function Coins({}: ICoinsProps) {
       </Helmet>
       <Header>
         <Title>Crypto Tracker</Title>
-        <Togglebtn>
-          <span>toggle</span>
+        <Togglebtn onClick={toggleDarkAtom}>
+          <span>{darkTAtom}</span>
         </Togglebtn>
       </Header>
       {isLoading ? (
