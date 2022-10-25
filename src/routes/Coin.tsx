@@ -185,10 +185,10 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-interface ICoinProps {
-}
+interface ICoinProps {}
 
-function Coin({ } = useParams<RouteParams>();
+function Coin({}: ICoinProps) {
+  const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");

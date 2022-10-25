@@ -24,3 +24,16 @@
 
 : React JS에서 state management 역할을 하는 library
 : 서로 다른 atom(bubble)을 형성, 특정 component에 종속되지 않음. value가 필요한 컴포넌트가 직접 연결
+
+- RecoilRoot
+  : recoil 상태를 사용하는 컴포넌트는 부모 트리 어딘가에 나타나는 RecoilRoot가 필요하다. Root 컴포넌트가 RecoilRoot를 넣기에 가장 좋은 장소다.
+
+- Atom
+  : Atom은 state의 일부를 나타낸다. Atoms는 어떤 컴포넌트에서나 읽고 쓸 수 있다.
+  : atom 값을 읽는 컴포넌트들은 암묵적으로 atom을 구독한다. 그래서 atom에 어떤 변화가 있으면 그 atom을 구독하는 모든 컴포넌트들이 리렌더링되는 결과가 발생한다.
+  const textState = atom({
+  key : unique id,
+  default : 기본값
+  })
+
+  `const isDark = useRecoilValue(isDarkAtom);` 형식으로 해당 컴포넌트에서 받아서 사용
